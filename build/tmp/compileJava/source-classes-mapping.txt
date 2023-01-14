@@ -16,10 +16,10 @@ com/example/demo/persistence/TodoRepository.java
  com.example.demo.persistence.TodoRepository
 com/example/demo/config/WebMvcConfig.java
  com.example.demo.config.WebMvcConfig
+com/example/demo/DemoApplication.java
+ com.example.demo.DemoApplication
 com/example/demo/DemoModel.java
  com.example.demo.DemoModel
  com.example.demo.DemoModel$DemoModelBuilder
-com/example/demo/DemoApplication.java
- com.example.demo.DemoApplication
 com/example/demo/dto/TodoDTO.java
  com.example.demo.dto.TodoDTO
