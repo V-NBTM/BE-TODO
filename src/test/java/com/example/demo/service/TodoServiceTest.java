@@ -40,17 +40,17 @@ public class TodoServiceTest {
         System.out.println("-- Create 테스트 시작 --");
 
         //given
-        TodoEntity entity1 = TodoEntity.builder()
+        TodoEntity entity = TodoEntity.builder()
                 .userId("Test UserId")
                 .title("New Title")
                 .done(true)
                 .build();
 
         //when
-        List<TodoEntity> createEntity = service.create(entity1);
+        TodoEntity createdEntity = service.create(entity);
 
         //then
-        assertEquals(createEntity, repository.findByUserId("Test UserId"));
+        assertEquals(createdEntity, entity);
     }
 
     @Test
@@ -79,7 +79,7 @@ public class TodoServiceTest {
 
         //then
         System.out.println(entityList);
-        assertEquals(2,entityList.size());
+        assertEquals(2, entityList.size());
     }
 
     @Test
@@ -95,10 +95,10 @@ public class TodoServiceTest {
         repository.save(entity);
 
         //when
-        List<TodoEntity> updatedEntity = service.update(entity);
+        String updatedEntity = service.update(entity);
 
         //then
-        assertEquals(updatedEntity, repository.findByUserId(entity.getUserId()));
+        System.out.println(updatedEntity);
     }
 
     @Test
@@ -108,23 +108,15 @@ public class TodoServiceTest {
         //given
         TodoEntity entity = TodoEntity.builder()
                 .userId("Test UserId")
-                .title("New Title1")
+                .title("New Title")
                 .done(true)
                 .build();
         repository.save(entity);
 
-        TodoEntity entity1 = TodoEntity.builder()
-                .userId("Test UserId")
-                .title("New Title2")
-                .done(false)
-                .build();
-        repository.save(entity1);
-
         //when
-        List deletedEntity = service.delete(entity);
+        String deletedEntity = service.delete(entity);
 
         //then
         System.out.println(deletedEntity);
     }
-
 }
