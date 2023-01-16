@@ -54,9 +54,9 @@ public class TodoServiceTest {
     }
 
     @Test
-    @DisplayName("Read 테스트")
+    @DisplayName("retrieve 테스트")
     void retrieve() {
-        System.out.println("-- Read 테스트 시작 --");
+        System.out.println("-- retrieve 테스트 시작 --");
 
         //given
         TodoEntity entity1 = TodoEntity.builder()
