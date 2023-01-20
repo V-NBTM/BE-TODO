@@ -1,12 +1,13 @@
 package com.example.demo.service;
 
-import com.example.TodoStudy.dto.TodoDTO;
-import com.example.TodoStudy.model.TodoEntity;
-import com.example.TodoStudy.persistence.TodoRepository;
 import com.example.demo.dto.TodoDTO;
 import com.example.demo.model.TodoEntity;
 import com.example.demo.persistence.TodoRepository;
-import org.junit.Assert;
+import com.example.demo.dto.TodoDTO;
+import com.example.demo.model.TodoEntity;
+import com.example.demo.persistence.TodoRepository;
+import org.assertj.core.api.Assert;
+import static org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +39,7 @@ class TodoServiceTest {
         givenProduct.setDone(entity.isDone());
 
         Assert.assertEquals(givenProduct.setId(entity.getId()), TodoDTO.toEntity());
-        Assert.assertEquals(entity.getUserId(), TodoDTO.toEntity(TodoDTO.builder().build()));
+        assertEquals(entity.getUserId(), TodoDTO.toEntity(TodoDTO.builder().build()));
 
 
         verify(repository).selectByUserId(entity.getUserId());
@@ -46,7 +47,7 @@ class TodoServiceTest {
 
     @Test
     void update() {
-        ass
+
 
 
 
@@ -59,7 +60,5 @@ class TodoServiceTest {
     }
 
     @Test
-    void validate() {
-       assertEquals.
-    }
+    void validate(){}
 }
