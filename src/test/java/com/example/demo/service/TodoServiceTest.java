@@ -1,130 +1,65 @@
 package com.example.demo.service;
 
+import com.example.TodoStudy.dto.TodoDTO;
+import com.example.TodoStudy.model.TodoEntity;
+import com.example.TodoStudy.persistence.TodoRepository;
+import com.example.demo.dto.TodoDTO;
 import com.example.demo.model.TodoEntity;
 import com.example.demo.persistence.TodoRepository;
-import org.junit.jupiter.api.*;
+import org.junit.Assert;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
-import java.util.List;
-import java.util.Optional;
+import static org.mockito.Mockito.verify;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-
-@SpringBootTest
-public class TodoServiceTest {
-
+class TodoServiceTest {
+    @MockBean
+    private TodoRepository repository = Mockito.mock(TodoRepository.class);
     @Autowired
-    private TodoRepository repository;
-
-    @Autowired
-    private TodoService service;
-
-    @BeforeEach
-    void setUp() {
-        System.out.println("-- BeforeEach 어노테이션 호출 --");
-    }
-
-    @AfterEach
-    void tearDown() {
-    }
+    private TodoEntity entity;
 
     @Test
-    void testService() {
-    }
-
-    @Test
-    @DisplayName("Create 테스트")
     void create() {
-        System.out.println("-- Create 테스트 시작 --");
+        TodoEntity givenProduct = new TodoEntity();
+        givenProduct.setId(entity.getId());
 
-        //given
-        TodoEntity entity1 = TodoEntity.builder()
-                .userId("Test UserId")
-                .title("New Title")
-                .done(true)
-                .build();
 
-        //when
-        List<TodoEntity> createEntity = service.create(entity1);
-
-        //then
-        assertEquals(createEntity, repository.findByUserId("Test UserId"));
+        verify(repository).findByUserId(entity.getUserId());
     }
 
     @Test
-    @DisplayName("retrieve 테스트")
-    void retrieve() {
-        System.out.println("-- retrieve 테스트 시작 --");
+    void select() {
+        TodoEntity givenProduct = new TodoEntity();
+        givenProduct.setId(entity.getId());
+        givenProduct.setUserId(entity.getUserId());
+        givenProduct.setTitle(entity.getTitle());
+        givenProduct.setDone(entity.isDone());
 
-        //given
-        TodoEntity entity1 = TodoEntity.builder()
-                .userId("Test UserId")
-                .title("New Title1")
-                .done(true)
-                .build();
-        repository.save(entity1);
-
-        TodoEntity entity2 = TodoEntity.builder()
-                .userId("Test UserId")
-                .title("New Title2")
-                .done(false)
-                .build();
-        repository.save(entity2);
+        Assert.assertEquals(givenProduct.setId(entity.getId()), TodoDTO.toEntity());
+        Assert.assertEquals(entity.getUserId(), TodoDTO.toEntity(TodoDTO.builder().build()));
 
 
-        //when
-        List<TodoEntity> entityList = service.retrieve("Test UserId");
-
-        //then
-        System.out.println(entityList);
-        assertEquals(2,entityList.size());
+        verify(repository).selectByUserId(entity.getUserId());
     }
 
     @Test
-    void update() throws Exception {
-        System.out.println("-- Update 테스트 시작 --");
+    void update() {
+        ass
 
-        //given
-        TodoEntity entity = TodoEntity.builder()
-                .userId("Test UserId")
-                .title("New Title")
-                .done(true)
-                .build();
-        repository.save(entity);
 
-        //when
-        List<TodoEntity> updatedEntity = service.update(entity);
 
-        //then
-        assertEquals(updatedEntity, repository.findByUserId(entity.getUserId()));
+        verify(repository).updateByUserId(entity.getUserId());
     }
 
     @Test
     void delete() {
-        System.out.println("-- Delete 테스트 시작 --");
 
-        //given
-        TodoEntity entity = TodoEntity.builder()
-                .userId("Test UserId")
-                .title("New Title1")
-                .done(true)
-                .build();
-        repository.save(entity);
-
-        TodoEntity entity1 = TodoEntity.builder()
-                .userId("Test UserId")
-                .title("New Title2")
-                .done(false)
-                .build();
-        repository.save(entity1);
-
-        //when
-        List deletedEntity = service.delete(entity);
-
-        //then
-        System.out.println(deletedEntity);
     }
 
+    @Test
+    void validate() {
+       assertEquals.
+    }
 }
